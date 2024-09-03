@@ -1,0 +1,35 @@
+﻿@model Category
+@* in this view we are asking for category name and display order, so the model that would be used here is Category which is defined above *@
+
+<form method="post">
+    @* since the method type is post, when we click on create button, it goes to controller and looks for Create view with annotation of HttpPost *@
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">Delete Category</h2>
+            <hr /> @* adding horizontal line *@
+        </div>
+      
+        <div class="mb-3 row">
+            <label asp-for="Name" class="p-0"></label>
+            <input asp-for="Name" type="text" class="form-control" readonly="true"/>
+        </div>
+        <div class="mb-3 row">
+            <label asp-for="DisplayOrder" class="p-0"></label>
+            <input asp-for="DisplayOrder" type="text" class="form-control" readonly="true" />
+        </div>
+
+
+        <div class="row">
+            <div class="col-6 ">
+                <button type="submit" class="btn btn-primary form-control btn-danger">Delete</button>
+            </div>
+            <div class="col-6">
+                <a asp-controller="Category" asp-action="Index" class="btn btn-secondary border form-control">Back to List</a>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
