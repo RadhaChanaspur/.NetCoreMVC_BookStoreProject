@@ -1,0 +1,46 @@
+﻿@page
+@model BulkyWebRazor.Pages.Categories.EditModel
+
+
+<form method="post">
+    @* since the method type is post, when we click on create button, it goes to controller and looks for Create view with annotation of HttpPost *@
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">Edit Category</h2>
+            <hr /> @* adding horizontal line *@
+        </div>
+        <input asp-for="Category.Id" hidden="true" />
+        <div asp-validation-summary="All"></div>
+        <div class="mb-3 row">
+            <label asp-for="Category.Name" class="p-0"></label>
+            @*             in classic asp.net, we used to identify the textbox using its name in .cs class and access its value.
+            but here we can use asp-for which will have all the attributes of the model defined i.e Category here
+
+            Here we are not giving any label for the controls, since we have associated this with Category attributes, it
+            takes the column names by default from the model, if displayName annotation is added, then it takes display name from Category Model *@
+            <input asp-for="Category.Name" type="text" class="form-control" />
+            <span asp-validation-for="Category.Name" class="text-danger"></span>
+            @* it checks against the validations like required , Range defined in the Category model *@
+        </div>
+        <div class="mb-3 row">
+            <label asp-for="Category.DisplayOrder" class="p-0"></label>
+            <input asp-for="Category.DisplayOrder" type="text" class="form-control" />
+            <span asp-validation-for="Category.DisplayOrder" class="text-danger"></span>
+
+        </div>
+
+
+        <div class="row">
+            <div class="col-6 ">
+                <button type="submit" class="btn btn-primary form-control">Update</button>
+            </div>
+            <div class="col-6">
+                <a asp-page="/Categories/Index"  class="btn btn-secondary border form-control">Back to List</a>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
