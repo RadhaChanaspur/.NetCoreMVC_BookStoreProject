@@ -1,44 +1,58 @@
 ﻿@model Category
 @* in this view we are asking for category name and display order, so the model that would be used here is Category which is defined above *@
 
-<form method="post">
-  @*   <input asp-for="Id" hidden="true" /> *@
-    @* since the method type is post, when we click on create button, it goes to controller and looks for Create view with annotation of HttpPost *@
-    <div class="border p-3 mt-4">
-        <div class="row pb-2">
-            <h2 class="text-primary">Create Category</h2>
-            <hr /> @* adding horizontal line *@
-        </div>
-        <div asp-validation-summary="All"></div>
-        <div class="mb-3 row">
-            <label asp-for="Name" class="p-0"></label>   
-@*             in classic asp.net, we used to identify the textbox using its name in .cs class and access its value.
-            but here we can use asp-for which will have all the attributes of the model defined i.e Category here
-            
-            Here we are not giving any label for the controls, since we have associated this with Category attributes, it
-            takes the column names by default from the model, if displayName annotation is added, then it takes display name from Category Model *@
-            <input asp-for="Name" type="text" class="form-control"/>
-            <span asp-validation-for="Name" class="text-danger"></span> 
-            @* it checks against the validations like required , Range defined in the Category model *@
-        </div>
-        <div class="mb-3 row">
-            <label asp-for="DisplayOrder" class="p-0"></label>
-            <input asp-for="DisplayOrder" type="text" class="form-control" />
-            <span asp-validation-for="DisplayOrder" class="text-danger"></span>
 
-        </div>
-
-
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient mt-0 py-3">
         <div class="row">
-            <div class="col-6 ">
-                <button type="submit" class="btn btn-primary form-control" >Create</button>
-            </div>
-            <div class="col-6">
-                <a asp-controller="Category" asp-action="Index" class="btn btn-secondary border form-control">Back to List</a>
+            <div class="col-12 text-center">
+                <h2 class="text-primary">Create Category</h2>
             </div>
         </div>
     </div>
-</form>
+    <div class="card-body p-4">
+        <form method="post" class="row">
+            @*   <input asp-for="Id" hidden="true" /> *@
+            @* since the method type is post, when we click on create button, it goes to controller and looks for Create view with annotation of HttpPost *@
+            <div class="border p-3">
+              
+                <div asp-validation-summary="All"></div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Name" type="text" class="form-control border-0 shadow" />
+                    <label asp-for="Name" class="ms-2" ></label>
+                    @*             in classic asp.net, we used to identify the textbox using its name in .cs class and access its value.
+                    but here we can use asp-for which will have all the attributes of the model defined i.e Category here
+
+                    Here we are not giving any label for the controls, since we have associated this with Category attributes, it
+                    takes the column names by default from the model, if displayName annotation is added, then it takes display name from Category Model *@
+                  
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                    @* it checks against the validations like required , Range defined in the Category model *@
+                </div>
+                <div class="form-floating py-2 col-12">
+
+                    <input asp-for="DisplayOrder" type="text" class="form-control border-0 shadow" />
+                    <label asp-for="DisplayOrder" class="ms-2"></label>
+                    <span asp-validation-for="DisplayOrder" class="text-danger"></span>
+
+                </div>
+
+
+                <div class="row pt-2">
+                    <div class="col-6 ">
+                        <button type="submit" class="btn btn-primary form-control">Create</button>
+                    </div>
+                    <div class="col-6">
+                        <a asp-controller="Category" asp-action="Index" class="btn btn-outline-primary border form-control">Back to List</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
 
 @section Scripts{
     <partial name="_ValidationScriptsPartial" />

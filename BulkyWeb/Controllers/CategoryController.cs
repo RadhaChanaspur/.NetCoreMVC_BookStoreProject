@@ -1,5 +1,5 @@
-﻿using BulkyWeb.Data;
-using BulkyWeb.Models;
+﻿using Bulky.Models;
+using Bulky.DataAccess.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing.Template;
 using System.Data.SqlTypes;

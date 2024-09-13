@@ -1502,6 +1502,34 @@
             "rid": "win"
           }
         }
+      },
+      "Bulky.DataAccess/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "Bulky.Models": "1.0.0",
+          "Microsoft.EntityFrameworkCore": "8.0.8",
+          "Microsoft.EntityFrameworkCore.SqlServer": "8.0.8"
+        },
+        "compile": {
+          "bin/placeholder/Bulky.DataAccess.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Bulky.DataAccess.dll": {}
+        }
+      },
+      "Bulky.Models/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "8.0.8"
+        },
+        "compile": {
+          "bin/placeholder/Bulky.Models.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Bulky.Models.dll": {}
+        }
       }
     }
   },
@@ -4096,10 +4124,22 @@
         "system.windows.extensions.nuspec",
         "useSharedDesignerContext.txt"
       ]
+    },
+    "Bulky.DataAccess/1.0.0": {
+      "type": "project",
+      "path": "../Bulky.DataAccess/Bulky.DataAccess.csproj",
+      "msbuildProject": "../Bulky.DataAccess/Bulky.DataAccess.csproj"
+    },
+    "Bulky.Models/1.0.0": {
+      "type": "project",
+      "path": "../Bulky.Models/Bulky.Models.csproj",
+      "msbuildProject": "../Bulky.Models/Bulky.Models.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
+      "Bulky.DataAccess >= 1.0.0",
+      "Bulky.Models >= 1.0.0",
       "Microsoft.EntityFrameworkCore >= 8.0.8",
       "Microsoft.EntityFrameworkCore.SqlServer >= 8.0.8",
       "Microsoft.EntityFrameworkCore.Tools >= 8.0.8"
@@ -4132,7 +4172,14 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Tech Docs\\.net Core\\BulkyWeb\\Bulky.DataAccess\\Bulky.DataAccess.csproj": {
+              "projectPath": "C:\\Tech Docs\\.net Core\\BulkyWeb\\Bulky.DataAccess\\Bulky.DataAccess.csproj"
+            },
+            "C:\\Tech Docs\\.net Core\\BulkyWeb\\Bulky.Models\\Bulky.Models.csproj": {
+              "projectPath": "C:\\Tech Docs\\.net Core\\BulkyWeb\\Bulky.Models\\Bulky.Models.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

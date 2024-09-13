@@ -1,0 +1,12 @@
+C:\Tech Docs\.net Core\BulkyWeb\Bulky.Utility\bin\Debug\net8.0\Bulky.Utility.deps.json
+C:\Tech Docs\.net Core\BulkyWeb\Bulky.Utility\bin\Debug\net8.0\Bulky.Utility.dll
+C:\Tech Docs\.net Core\BulkyWeb\Bulky.Utility\bin\Debug\net8.0\Bulky.Utility.pdb
+C:\Tech Docs\.net Core\BulkyWeb\Bulky.Utility\obj\Debug\net8.0\Bulky.Utility.GeneratedMSBuildEditorConfig.editorconfig
+C:\Tech Docs\.net Core\BulkyWeb\Bulky.Utility\obj\Debug\net8.0\Bulky.Utility.AssemblyInfoInputs.cache
+C:\Tech Docs\.net Core\BulkyWeb\Bulky.Utility\obj\Debug\net8.0\Bulky.Utility.AssemblyInfo.cs
+C:\Tech Docs\.net Core\BulkyWeb\Bulky.Utility\obj\Debug\net8.0\Bulky.Utility.csproj.CoreCompileInputs.cache
+C:\Tech Docs\.net Core\BulkyWeb\Bulky.Utility\obj\Debug\net8.0\Bulky.Utility.sourcelink.json
+C:\Tech Docs\.net Core\BulkyWeb\Bulky.Utility\obj\Debug\net8.0\Bulky.Utility.dll
+C:\Tech Docs\.net Core\BulkyWeb\Bulky.Utility\obj\Debug\net8.0\refint\Bulky.Utility.dll
+C:\Tech Docs\.net Core\BulkyWeb\Bulky.Utility\obj\Debug\net8.0\Bulky.Utility.pdb
+C:\Tech Docs\.net Core\BulkyWeb\Bulky.Utility\obj\Debug\net8.0\ref\Bulky.Utility.dll

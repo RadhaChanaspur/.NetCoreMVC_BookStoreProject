@@ -135,3 +135,7 @@ C:\Tech Docs\.net Core\BulkyWeb\BulkyWeb\bin\Debug\net8.0\runtimes\win\lib\net6.
 C:\Tech Docs\.net Core\BulkyWeb\BulkyWeb\obj\Debug\net8.0\BulkyWeb.csproj.AssemblyReference.cache
 C:\Tech Docs\.net Core\BulkyWeb\BulkyWeb\obj\Debug\net8.0\BulkyWeb.csproj.Up2Date
 C:\Tech Docs\.net Core\BulkyWeb\BulkyWeb\obj\Debug\net8.0\BulkyWeb.sourcelink.json
+C:\Tech Docs\.net Core\BulkyWeb\BulkyWeb\bin\Debug\net8.0\Bulky.DataAccess.dll
+C:\Tech Docs\.net Core\BulkyWeb\BulkyWeb\bin\Debug\net8.0\Bulky.Models.dll
+C:\Tech Docs\.net Core\BulkyWeb\BulkyWeb\bin\Debug\net8.0\Bulky.DataAccess.pdb
+C:\Tech Docs\.net Core\BulkyWeb\BulkyWeb\bin\Debug\net8.0\Bulky.Models.pdb
