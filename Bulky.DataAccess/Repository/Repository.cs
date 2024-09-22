@@ -18,21 +18,39 @@ namespace Bulky.DataAccess.Repository
         public Repository(ApplicationDbContext dbContext) { 
             _context = dbContext;
             _dbSet = dbContext.Set<T>();
+
+            // we can include like this as well to get category
+            //_context.Products.Include(obj => obj.category).ToList();
         }
         public void Add(T entity)
         {
             _dbSet.Add(entity);
         }
 
-        public T Get(Expression<Func<T, bool>> filter)
+        public T Get(Expression<Func<T, bool>> filter, String? includeProperties = null)
         {
             IQueryable<T> query = _dbSet;
+            if (!string.IsNullOrEmpty(includeProperties))
+            {
+                foreach (var property in includeProperties.Split(','))
+                {
+                    query = query.Include(property);
+                }
+            }
+
             return query.Where(filter).FirstOrDefault();
         }
 
-        public IEnumerable<T> GetAll()
+        public IEnumerable<T> GetAll(String? includeProperties = null)
         {
             IQueryable<T> values = _dbSet;
+            if (!string.IsNullOrEmpty(includeProperties))
+            {
+                foreach(var property in includeProperties.Split(','))
+                {
+                    values = values.Include(property);
+                }
+            }
             return values.ToList();
         }
 

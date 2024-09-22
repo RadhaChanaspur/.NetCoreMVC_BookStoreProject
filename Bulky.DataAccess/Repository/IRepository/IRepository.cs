@@ -10,8 +10,8 @@ namespace Bulky.DataAccess.Repository.IRepository
     public interface IRepository<T> where T : class
     {
         // T can be anything like product, category..
-        IEnumerable<T> GetAll(); //to get multiple items
-        T Get(Expression<Func<T, bool>> filter); // to get one item
+        IEnumerable<T> GetAll(String? includeProperties = null); //to get multiple items
+        T Get(Expression<Func<T, bool>> filter, String? includeProperties = null); // to get one item
         void  Add(T entity);
         void Remove(T entity);
         void RemoveRange(IEnumerable<T> entities);

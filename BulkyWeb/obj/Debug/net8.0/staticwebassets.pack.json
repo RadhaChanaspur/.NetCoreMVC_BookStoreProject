@@ -13,6 +13,42 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Tech Docs\\.net Core\\BulkyWeb\\BulkyWeb\\wwwroot\\images\\product\\02064e70-63e7-4b22-8dff-f23981951f8a.jpg",
+      "PackagePath": "staticwebassets\\images\\product\\02064e70-63e7-4b22-8dff-f23981951f8a.jpg"
+    },
+    {
+      "Id": "C:\\Tech Docs\\.net Core\\BulkyWeb\\BulkyWeb\\wwwroot\\images\\product\\5a418f39-7fe8-4b93-ace2-5f1e2e56029a.png",
+      "PackagePath": "staticwebassets\\images\\product\\5a418f39-7fe8-4b93-ace2-5f1e2e56029a.png"
+    },
+    {
+      "Id": "C:\\Tech Docs\\.net Core\\BulkyWeb\\BulkyWeb\\wwwroot\\images\\product\\73f16037-7583-478c-82be-813dd46bc821.jpg",
+      "PackagePath": "staticwebassets\\images\\product\\73f16037-7583-478c-82be-813dd46bc821.jpg"
+    },
+    {
+      "Id": "C:\\Tech Docs\\.net Core\\BulkyWeb\\BulkyWeb\\wwwroot\\images\\product\\7afe9c0a-4f3c-4db6-8732-c13df71068d6.jpg",
+      "PackagePath": "staticwebassets\\images\\product\\7afe9c0a-4f3c-4db6-8732-c13df71068d6.jpg"
+    },
+    {
+      "Id": "C:\\Tech Docs\\.net Core\\BulkyWeb\\BulkyWeb\\wwwroot\\images\\product\\8da4eece-475f-4058-abea-368129aa907f.png",
+      "PackagePath": "staticwebassets\\images\\product\\8da4eece-475f-4058-abea-368129aa907f.png"
+    },
+    {
+      "Id": "C:\\Tech Docs\\.net Core\\BulkyWeb\\BulkyWeb\\wwwroot\\images\\product\\90d14faf-cd73-4893-81d0-b6496898a1f4.jpg",
+      "PackagePath": "staticwebassets\\images\\product\\90d14faf-cd73-4893-81d0-b6496898a1f4.jpg"
+    },
+    {
+      "Id": "C:\\Tech Docs\\.net Core\\BulkyWeb\\BulkyWeb\\wwwroot\\images\\product\\bae69e15-37f8-475e-8334-6f4de99e7f5c.jpg",
+      "PackagePath": "staticwebassets\\images\\product\\bae69e15-37f8-475e-8334-6f4de99e7f5c.jpg"
+    },
+    {
+      "Id": "C:\\Tech Docs\\.net Core\\BulkyWeb\\BulkyWeb\\wwwroot\\images\\product\\f68a3276-7aeb-40ed-bd69-0f13a654d091.png",
+      "PackagePath": "staticwebassets\\images\\product\\f68a3276-7aeb-40ed-bd69-0f13a654d091.png"
+    },
+    {
+      "Id": "C:\\Tech Docs\\.net Core\\BulkyWeb\\BulkyWeb\\wwwroot\\js\\Product.js",
+      "PackagePath": "staticwebassets\\js\\Product.js"
+    },
+    {
       "Id": "C:\\Tech Docs\\.net Core\\BulkyWeb\\BulkyWeb\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

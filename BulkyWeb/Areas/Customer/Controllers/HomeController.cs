@@ -1,3 +1,4 @@
+using Bulky.DataAccess.Repository.IRepository;
 using Bulky.Models.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -8,17 +9,24 @@ namespace BulkyWeb.Areas.Customer.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IUnitOfWork unitOfWork)
         {
             _logger = logger;
+            _unitOfWork = unitOfWork;
         }
 
         public IActionResult Index()
         {
-            return View();
+            IEnumerable<Product> products = _unitOfWork.Product.GetAll(includeProperties: "category");
+            return View(products);
         }
-
+        public IActionResult Details(int id)
+        {
+            Product product = _unitOfWork.Product.Get(u => u.Id == id, includeProperties: "category");
+            return View(product);
+        }
         public IActionResult Privacy()
         {
             return View();

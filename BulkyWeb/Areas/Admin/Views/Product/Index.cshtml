@@ -15,75 +15,40 @@
         <div class="row  pb-3">
             <div class="col-6"></div>
             <div class="col-6 text-end">
-                <a asp-area="Admin" asp-controller="Product" asp-action="Create" class="btn btn-primary">
+                <a asp-area="Admin" asp-controller="Product" asp-action="Upsert" class="btn btn-primary">
                     <i class="bi bi-plus-circle"></i> Create New Product
                 </a>
             </div>
 
         </div>
-        <table class="table table-bordered table-striped">
+        <table id="ProductsTable" class="table table-bordered table-striped" style="width:100%">
             <thead>
                 <tr>
-                    <td>
+                    <th>
                         Title
-                    </td>
-                    <td>
+                    </th>
+                    <th>
                         ISBN
-                    </td>
-                    <td>
+                    </th>
+                    <th>
                         Author
-                    </td>
-                    <td>
+                    </th>
+                    <th>
                         ListPrice
-                    </td>
-                    <td>
+                    </th>
+                    <th>
                        Category
-                    </td>
+                    </th>
+                    <th></th>
                 </tr>
             </thead>
-            <tbody>
-                @foreach (var obj in Model.OrderBy(item => item.Title))
-                {
-                    @* here Model indicates the model this view is associated to which in this case is Categories *@
-                    <tr>
-                        <td>
-                            @obj.Title
-                        </td>
-                        <td>
-                            @obj.ISBN
-                        </td>
-                        <td>
-                            @obj.Author
-                        </td>
-                        <td>
-                            @obj.ListPrice
-                        </td>
-                        <td>
-
-                        </td>
-                        <td>
-                            <div class="w-75 btn-group">
-                                <a asp-controller="Product" asp-action="Edit" asp-route-id="@obj.Id" class="btn btn-primary mx-2">
-                                    <i class="bi bi-pencil-square"></i>Edit
-                                </a>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="w-75 btn-group">
-                                <a asp-controller="Product" asp-action="Delete" asp-route-id="@obj.Id" class="btn btn-danger mx-2">
-                                    <i class="bi bi-trash-fill"></i>Delete
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
-
-
-                }
-            </tbody>
+          
 
         </table>
     </div>
 </div>
 
-<div class="container">
-</div>
+
+@section Scripts{
+    <script src="~/js/Product.js"></script>
+}
