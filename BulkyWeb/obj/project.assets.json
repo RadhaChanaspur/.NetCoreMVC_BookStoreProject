@@ -3104,6 +3104,19 @@
         "frameworkReferences": [
           "Microsoft.AspNetCore.App"
         ]
+      },
+      "Bulky.Utility/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "Microsoft.AspNetCore.Identity.UI": "8.0.8"
+        },
+        "compile": {
+          "bin/placeholder/Bulky.Utility.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Bulky.Utility.dll": {}
+        }
       }
     }
   },
@@ -8474,12 +8487,18 @@
       "type": "project",
       "path": "../Bulky.Models/Bulky.Models.csproj",
       "msbuildProject": "../Bulky.Models/Bulky.Models.csproj"
+    },
+    "Bulky.Utility/1.0.0": {
+      "type": "project",
+      "path": "../Bulky.Utility/Bulky.Utility.csproj",
+      "msbuildProject": "../Bulky.Utility/Bulky.Utility.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
       "Bulky.DataAccess >= 1.0.0",
       "Bulky.Models >= 1.0.0",
+      "Bulky.Utility >= 1.0.0",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 8.0.8",
       "Microsoft.AspNetCore.Identity.UI >= 8.0.8",
       "Microsoft.EntityFrameworkCore >= 8.0.8",
@@ -8522,6 +8541,9 @@
             },
             "C:\\Tech Docs\\.net Core\\BulkyWeb\\Bulky.Models\\Bulky.Models.csproj": {
               "projectPath": "C:\\Tech Docs\\.net Core\\BulkyWeb\\Bulky.Models\\Bulky.Models.csproj"
+            },
+            "C:\\Tech Docs\\.net Core\\BulkyWeb\\Bulky.Utility\\Bulky.Utility.csproj": {
+              "projectPath": "C:\\Tech Docs\\.net Core\\BulkyWeb\\Bulky.Utility\\Bulky.Utility.csproj"
             }
           }
         }

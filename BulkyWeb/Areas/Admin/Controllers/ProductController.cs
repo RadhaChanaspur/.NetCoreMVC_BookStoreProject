@@ -7,11 +7,15 @@ using Bulky.Models.ViewModel;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using Microsoft.CodeAnalysis.FlowAnalysis.DataFlow;
 using Microsoft.AspNetCore.Hosting;
+using Bulky.Utility;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace BulkyWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = StaticDetails.Role_Admin)]
+
     public class ProductController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

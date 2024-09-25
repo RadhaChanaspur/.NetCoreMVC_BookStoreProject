@@ -4,10 +4,13 @@ using Microsoft.AspNetCore.Routing.Template;
 using System.Data.SqlTypes;
 using Bulky.Models.Models;
 using Bulky.DataAccess.Repository.IRepository;
+using Microsoft.AspNetCore.Authorization;
+using Bulky.Utility;
 
 namespace BulkyWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = StaticDetails.Role_Admin)]
     public class CategoryController : Controller
     {
 
