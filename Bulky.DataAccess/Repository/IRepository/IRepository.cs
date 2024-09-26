@@ -11,7 +11,7 @@ namespace Bulky.DataAccess.Repository.IRepository
     {
         // T can be anything like product, category..
         IEnumerable<T> GetAll(String? includeProperties = null); //to get multiple items
-        T Get(Expression<Func<T, bool>> filter, String? includeProperties = null); // to get one item
+        T Get(Expression<Func<T, bool>> filter, String? includeProperties = null, bool istracked=false); // to get one item
         void  Add(T entity);
         void Remove(T entity);
         void RemoveRange(IEnumerable<T> entities);
