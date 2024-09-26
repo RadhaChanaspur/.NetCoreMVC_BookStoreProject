@@ -154,7 +154,6 @@ namespace BulkyWeb.Areas.Admin.Controllers
             _unitOfWork.Product.Remove(product);
             _unitOfWork.save();
 
-            List<Product> productsList = _unitOfWork.Product.GetAll(includeProperties: "category").ToList();
             return Json(new { success = true, message = "Delete Successful" });
         }
         #endregion
