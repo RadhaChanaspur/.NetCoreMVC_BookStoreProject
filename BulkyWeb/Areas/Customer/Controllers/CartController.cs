@@ -1,6 +1,7 @@
 ﻿using Bulky.DataAccess.Repository.IRepository;
 using Bulky.Models.Models;
 using Bulky.Models.ViewModel;
+using Bulky.Utility;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -10,7 +11,9 @@ namespace BulkyWeb.Areas.Customer.Controllers
     public class CartController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-        private ShoppingCartVM shoppingcartVM;
+        [BindProperty] //when we add this, values on the form will be binded to the model passed on to the view, since this 
+        //property is updated with UI values we can use this directly in summaryPost method
+        public ShoppingCartVM shoppingcartVM { get; set; }
 
         public CartController(IUnitOfWork unitOfWork)
         {
@@ -23,19 +26,103 @@ namespace BulkyWeb.Areas.Customer.Controllers
 
             shoppingcartVM = new ShoppingCartVM()
             {
-                ShoppingCartList = _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == userId, includeProperties: "Product")
+                ShoppingCartList = _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == userId, includeProperties: "Product"),
+                Order = new Order()
             };
 
             foreach (ShoppingCart cart in shoppingcartVM.ShoppingCartList) {
                 cart.Price = getPriceBasedOnQuantity(cart);
-                shoppingcartVM.OrderTotal += (cart.Price * cart.Quantity);
+                shoppingcartVM.Order.OrderTotal += (cart.Price * cart.Quantity);
             }
             return View(shoppingcartVM);
 
         }
 
-        public IActionResult Summary() { 
-            return View();
+        public IActionResult Summary() {
+
+            var userIdentity = (ClaimsIdentity)User.Identity;
+            var userId = userIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            shoppingcartVM = new ShoppingCartVM()
+            {
+                ShoppingCartList = _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == userId, includeProperties: "Product"),
+                Order = new Order()
+            };
+
+            shoppingcartVM.Order.applicationUser = _unitOfWork.ApplicationUser.Get(u=> u.Id == userId);
+
+            shoppingcartVM.Order.Name = shoppingcartVM.Order.applicationUser.Name;
+            shoppingcartVM.Order.StreetAddress = shoppingcartVM.Order.applicationUser.StreeAddress;
+            shoppingcartVM.Order.City = shoppingcartVM.Order.applicationUser.City;
+            shoppingcartVM.Order.PhoneNumber = shoppingcartVM.Order.applicationUser.PhoneNumber;
+            shoppingcartVM.Order.State = shoppingcartVM.Order.applicationUser.State;
+            shoppingcartVM.Order.PinCode = shoppingcartVM.Order.applicationUser.Postalcode;
+
+
+
+            foreach (ShoppingCart cart in shoppingcartVM.ShoppingCartList)
+            {
+                cart.Price = getPriceBasedOnQuantity(cart);
+                shoppingcartVM.Order.OrderTotal += (cart.Price * cart.Quantity);
+            }
+            return View(shoppingcartVM);
+        }
+        [HttpPost]
+        [ActionName("Summary")]
+        public IActionResult SummaryPost()
+		{
+			var userIdentity = (ClaimsIdentity)User.Identity;
+			var userId = userIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            shoppingcartVM.ShoppingCartList = _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == userId, includeProperties: "Product");
+				
+
+			ApplicationUser applicationUser = _unitOfWork.ApplicationUser.Get(u => u.Id == userId);
+            shoppingcartVM.Order.OrderDate = DateTime.Now;
+            shoppingcartVM.Order.ApplicationUserId = userId;
+
+            //we are not updating address related fields, since they are already present in the view it will be automatically binded to the model because of BindProperty
+
+            foreach (ShoppingCart cart in shoppingcartVM.ShoppingCartList)
+            {
+                cart.Price = getPriceBasedOnQuantity(cart);
+                shoppingcartVM.Order.OrderTotal += (cart.Price * cart.Quantity);
+            }
+
+            var companyID = applicationUser.CompanyId;
+            if(companyID == null || companyID == 0)
+            {
+                //regular customer account, we have to capture payment details at the time of order placement
+                shoppingcartVM.Order.OrderStatus = StaticDetails.StatusPending;
+                shoppingcartVM.Order.PaymentStatus = StaticDetails.PaymentStatusPending;
+            }
+            else
+            {
+				shoppingcartVM.Order.OrderStatus = StaticDetails.StatusApproved;
+				shoppingcartVM.Order.PaymentStatus = StaticDetails.PaymentStatusDelayedPayment;
+			}
+
+            _unitOfWork.Order.Add(shoppingcartVM.Order);
+            _unitOfWork.save();
+
+            foreach (var cart in shoppingcartVM.ShoppingCartList) { 
+                OrderDetails orderDetails = new OrderDetails();
+                orderDetails.OrderId = shoppingcartVM.Order.Id;
+                orderDetails.ProductId = cart.ProductId;
+                orderDetails.Count = cart.Quantity;
+                orderDetails.Price = cart.Price;    
+
+                _unitOfWork.OrderDetails.Add(orderDetails);
+                _unitOfWork.save();
+
+            }
+           
+			return RedirectToAction(nameof(OrderConfirmation), new {shoppingcartVM.Order.Id});
+		}
+
+        public IActionResult OrderConfirmation(int id)
+        {
+            return View(id);
         }
 
         public IActionResult plus(int cartId)

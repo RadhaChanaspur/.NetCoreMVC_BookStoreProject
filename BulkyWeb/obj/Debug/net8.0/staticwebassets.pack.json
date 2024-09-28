@@ -13,6 +13,10 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Tech Docs\\.net Core\\BulkyWeb\\BulkyWeb\\wwwroot\\images\\OrderPlaced.png",
+      "PackagePath": "staticwebassets\\images\\OrderPlaced.png"
+    },
+    {
       "Id": "C:\\Tech Docs\\.net Core\\BulkyWeb\\BulkyWeb\\wwwroot\\images\\product\\02064e70-63e7-4b22-8dff-f23981951f8a.jpg",
       "PackagePath": "staticwebassets\\images\\product\\02064e70-63e7-4b22-8dff-f23981951f8a.jpg"
     },

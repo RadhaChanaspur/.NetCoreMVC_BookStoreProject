@@ -38,11 +38,11 @@ namespace Bulky.Models.Models
         [Required]
         public string StreetAddress { get; set; }
         [Required]
-        public string Ciy {  get; set; }
+        public string City {  get; set; }
         [Required]
         public string State {  get; set; }
         [Required]
-        public string PineCode { get; set; }
+        public string PinCode { get; set; }
         [Required]
         public string Name { get; set; }
     }
