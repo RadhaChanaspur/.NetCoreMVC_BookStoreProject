@@ -46,9 +46,12 @@ namespace Bulky.DataAccess.Repository
             return query.Where(filter).FirstOrDefault();
         }
 
-        public IEnumerable<T> GetAll(String? includeProperties = null)
+        public IEnumerable<T> GetAll(Expression<Func<T, bool>> filter,String? includeProperties = null)
         {
             IQueryable<T> values = _dbSet;
+            if(filter != null)
+                values = values.Where(filter);
+
             if (!string.IsNullOrEmpty(includeProperties))
             {
                 foreach(var property in includeProperties.Split(','))
