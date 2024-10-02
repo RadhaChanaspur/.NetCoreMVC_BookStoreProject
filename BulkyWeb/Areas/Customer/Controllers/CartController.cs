@@ -116,12 +116,23 @@ namespace BulkyWeb.Areas.Customer.Controllers
                 _unitOfWork.save();
 
             }
+
+            //implement payment logic
+            if(companyID ==0 || companyID == null)
+            {
+                //regular customer account
+            }
            
 			return RedirectToAction(nameof(OrderConfirmation), new {shoppingcartVM.Order.Id});
 		}
 
         public IActionResult OrderConfirmation(int id)
         {
+           Order order = _unitOfWork.Order.Get(u=> u.Id == id);
+           List<ShoppingCart> shoppingCarts = _unitOfWork.ShoppingCart.GetAll(u=> u.ApplicationUserId == order.ApplicationUserId).ToList();
+            _unitOfWork.ShoppingCart.RemoveRange(shoppingCarts);
+            _unitOfWork.save();
+
             return View(id);
         }
 

@@ -31,7 +31,8 @@ namespace Bulky.Models.Models
         public DateTime PaymentDate { get; set; } // adding this seperately apart from order date, since for company user they can make payment within 30 days of order booking
         public DateOnly PaymentDue {  get; set; }   
 
-        public string? PaymentRefernecId { get; set; }
+        public string? SessionID { get; set; }  
+        public string? PaymentReferenceId { get; set; }
 
         [Required]
         public string PhoneNumber { get; set; }
