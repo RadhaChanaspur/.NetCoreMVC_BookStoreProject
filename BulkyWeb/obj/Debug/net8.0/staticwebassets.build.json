@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "XekGlom0N0cf9/Q7NiMeKoZJQPloMS6+o0Ll26OEINg=",
+  "Hash": "iug5Q5ngdaFL6Bwd1Qniwb2xLQO2lWWsCQ6F2/blbkk=",
   "Source": "BulkyWeb",
   "BasePath": "_content/BulkyWeb",
   "Mode": "Default",
@@ -91,6 +91,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Tech Docs\\.net Core\\BulkyWeb\\BulkyWeb\\wwwroot\\images\\Book.png",
+      "SourceId": "BulkyWeb",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Tech Docs\\.net Core\\BulkyWeb\\BulkyWeb\\wwwroot\\",
+      "BasePath": "_content/BulkyWeb",
+      "RelativePath": "images/Book.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\Book.png"
     },
     {
       "Identity": "C:\\Tech Docs\\.net Core\\BulkyWeb\\BulkyWeb\\wwwroot\\images\\OrderPlaced.png",

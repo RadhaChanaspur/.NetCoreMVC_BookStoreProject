@@ -16,3 +16,5 @@ C:\Tech Docs\.net Core\BulkyWeb\Bulky.DataAccess\obj\Debug\net8.0\refint\Bulky.D
 C:\Tech Docs\.net Core\BulkyWeb\Bulky.DataAccess\obj\Debug\net8.0\Bulky.DataAccess.pdb
 C:\Tech Docs\.net Core\BulkyWeb\Bulky.DataAccess\obj\Debug\net8.0\Bulky.DataAccess.genruntimeconfig.cache
 C:\Tech Docs\.net Core\BulkyWeb\Bulky.DataAccess\obj\Debug\net8.0\ref\Bulky.DataAccess.dll
+C:\Tech Docs\.net Core\BulkyWeb\Bulky.DataAccess\bin\Debug\net8.0\Bulky.Utility.dll
+C:\Tech Docs\.net Core\BulkyWeb\Bulky.DataAccess\bin\Debug\net8.0\Bulky.Utility.pdb

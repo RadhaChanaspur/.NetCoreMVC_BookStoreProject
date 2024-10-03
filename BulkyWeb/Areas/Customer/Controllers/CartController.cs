@@ -133,6 +133,8 @@ namespace BulkyWeb.Areas.Customer.Controllers
             _unitOfWork.ShoppingCart.RemoveRange(shoppingCarts);
             _unitOfWork.save();
 
+            HttpContext.Session.Clear();
+
             return View(id);
         }
 
@@ -153,6 +155,9 @@ namespace BulkyWeb.Areas.Customer.Controllers
             var cartFromDB = _unitOfWork.ShoppingCart.Get(u=> u.CartId == cartId);
             if (cartFromDB.Quantity == 1) { 
                 _unitOfWork.ShoppingCart.Remove(cartFromDB);
+
+                HttpContext.Session.SetInt32(StaticDetails.SessionCart,
+               _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == cartFromDB.ApplicationUserId).Count()-1);
             }
             else
             {
@@ -164,12 +169,20 @@ namespace BulkyWeb.Areas.Customer.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+      
+
         public IActionResult delete(int cartId) { 
             
             var cartFromDB = _unitOfWork.ShoppingCart.Get(u=>u.CartId == cartId);
 
             _unitOfWork.ShoppingCart.Remove(cartFromDB);
             _unitOfWork.save();
+
+            var userIdentity = (ClaimsIdentity)User.Identity;
+            var userid = userIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            HttpContext.Session.SetInt32(StaticDetails.SessionCart,
+                _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == userid).Count());
 
             return RedirectToAction(nameof(Index));
         }
