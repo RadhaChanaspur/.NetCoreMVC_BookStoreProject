@@ -29,7 +29,7 @@ namespace Bulky.Models.Models
         public string? Carrier {  get; set; }   
 
         public DateTime PaymentDate { get; set; } // adding this seperately apart from order date, since for company user they can make payment within 30 days of order booking
-        public DateOnly PaymentDue {  get; set; }   
+        public DateTime PaymentDue {  get; set; }   
 
         public string? SessionID { get; set; }  
         public string? PaymentReferenceId { get; set; }

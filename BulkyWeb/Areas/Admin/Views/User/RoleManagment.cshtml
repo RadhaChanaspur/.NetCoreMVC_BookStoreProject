@@ -1,0 +1,84 @@
+﻿@model RoleManagmentVM
+
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient mt-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-primary">Manage User Role</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form method="post" class="row">
+               <input asp-for="applicationUser.Id" hidden="true" />
+            <div class="border p-3">
+              
+                <div asp-validation-summary="All"></div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="applicationUser.Name" type="text" readonly class="form-control border-0 shadow" />
+                    <label asp-for="applicationUser.Name" class="ms-2"></label>
+                </div>
+                <div class="form-floating py-2 col-12">
+
+                    <select asp-for="applicationUser.Role" asp-items="@Model.RoleList" type="text" class="form-select border-0 shadow">
+                        <option disabled selected>--Select Category--</option>
+                    </select>
+                    <label asp-for="applicationUser.Role" class="ms-2"></label>
+                    <span asp-validation-for="applicationUser.Role" class="text-danger"></span>
+
+                </div>
+                @{
+                    var CompanyVisible = "display:none;";
+                }
+                @if(Model.applicationUser.Role == StaticDetails.Role_Company)
+                {
+                    CompanyVisible = "display:block;";
+
+                }
+                <div class="form-floating py-2 col-12">
+
+                    <select asp-for="applicationUser.CompanyId" style="@CompanyVisible" asp-items="@Model.CompanyList" type="text" class="form-select border-0 shadow">
+                        <option disabled selected>--Select Category--</option>
+                    </select>
+                  
+
+                </div>
+
+
+                <div class="row pt-2">
+                    <div class="col-6 ">
+                        <button type="submit" class="btn btn-primary form-control">Update Role</button>
+                    </div>
+                    <div class="col-6">
+                        <a asp-area="Admin" asp-controller="User" asp-action="Index" class="btn btn-outline-primary border form-control">Back to List</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        $(document).ready(function(){
+            Display();
+            $('#applicationUser_Role').change(function () {
+                Display();
+
+            })
+        })
+
+
+        function Display(){
+            var selectedItem = $('#applicationUser_Role Option:Selected').text();
+            if (selectedItem == "Company")
+                $('#applicationUser_CompanyId').show();
+            else
+                $('#applicationUser_CompanyId').hide();
+        }
+    </script>
+}

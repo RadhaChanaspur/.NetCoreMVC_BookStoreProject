@@ -65,6 +65,10 @@
       "PackagePath": "staticwebassets\\js\\Product.js"
     },
     {
+      "Id": "C:\\Tech Docs\\.net Core\\BulkyWeb\\BulkyWeb\\wwwroot\\js\\Users.js",
+      "PackagePath": "staticwebassets\\js\\Users.js"
+    },
+    {
       "Id": "C:\\Tech Docs\\.net Core\\BulkyWeb\\BulkyWeb\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },
