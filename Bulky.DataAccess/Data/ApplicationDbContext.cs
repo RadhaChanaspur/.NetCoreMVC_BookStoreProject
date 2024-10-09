@@ -24,6 +24,8 @@ namespace Bulky.DataAccess.Data
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetails> OrderDetails { get; set; }
 
+        public DbSet<ProductImage> ProductImages { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -46,8 +48,7 @@ namespace Bulky.DataAccess.Data
                     Price = 90,
                     Price50 = 85,
                     Price100 = 80,
-                    CategoryId = 4,
-                    ImageURL =""
+                    CategoryId = 4
                 },
                 new Product
                 {
@@ -60,8 +61,7 @@ namespace Bulky.DataAccess.Data
                     Price = 30,
                     Price50 = 25,
                     Price100 = 20,
-                    CategoryId = 4,
-                    ImageURL = ""
+                    CategoryId = 4
 
                 },
                 new Product
@@ -75,9 +75,7 @@ namespace Bulky.DataAccess.Data
                     Price = 50,
                     Price50 = 40,
                     Price100 = 35,
-                    CategoryId = 7,
-                    ImageURL=""
-
+                    CategoryId = 7
                 },
                 new Product
                 {
@@ -90,8 +88,7 @@ namespace Bulky.DataAccess.Data
                     Price = 65,
                     Price50 = 60,
                     Price100 = 55,
-                    CategoryId = 7,
-                    ImageURL =""
+                    CategoryId = 7
                 },
                 new Product
                 {
@@ -104,8 +101,7 @@ namespace Bulky.DataAccess.Data
                     Price = 27,
                     Price50 = 25,
                     Price100 = 20,
-                    CategoryId = 8,
-                    ImageURL=""
+                    CategoryId = 8
                 },
                 new Product
                 {
@@ -118,8 +114,7 @@ namespace Bulky.DataAccess.Data
                     Price = 23,
                     Price50 = 22,
                     Price100 = 20,
-                    CategoryId = 8,
-                    ImageURL=""
+                    CategoryId = 8
                 });
 
                 modelBuilder.Entity<Company>().HasData(

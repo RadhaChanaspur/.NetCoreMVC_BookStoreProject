@@ -15,15 +15,15 @@ namespace BulkyWeb.Areas.Admin.Controllers
     [Authorize(Roles = StaticDetails.Role_Admin)]
     public class UserController : Controller
     {
-        private ApplicationDbContext _context;
         private UserManager<IdentityUser> _userManager;
+        private RoleManager<IdentityRole> _roleManager;
 
         private IUnitOfWork _unitOfWork;
-        public UserController(ApplicationDbContext applicationDbContext,IUnitOfWork unitOfWork, UserManager<IdentityUser> userManager)
+        public UserController(IUnitOfWork unitOfWork, UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
         {
-            _context = applicationDbContext;
             _unitOfWork = unitOfWork;
             _userManager = userManager;
+            _roleManager = roleManager;
         }
         public IActionResult Index()
         {
@@ -35,22 +35,24 @@ namespace BulkyWeb.Areas.Admin.Controllers
         {
             RoleManagmentVM roleManagmentVM = new RoleManagmentVM()
             {
-                applicationUser = _context.applicationUsers.FirstOrDefault(u => u.Id == userid),
-                CompanyList = _context.Companies.Select(u => new SelectListItem()
+                applicationUser = _unitOfWork.ApplicationUser.Get(u => u.Id == userid,includeProperties: "company"),
+                CompanyList = _unitOfWork.Company.GetAll().Select(u => new SelectListItem()
                 {
                     Text = u.Name,
                     Value = u.ID.ToString()
 
                 }),
-                RoleList = _context.Roles.Select(u => new SelectListItem()
+                RoleList = _roleManager.Roles.Select(u => new SelectListItem()
                 {
                     Text = u.Name,
                     Value = u.Name
                 })
             };
 
-            string roleId = _context.UserRoles.FirstOrDefault(u => u.UserId == userid).RoleId;
-            roleManagmentVM.applicationUser.Role = _context.Roles.FirstOrDefault(u => u.Id == roleId).Name;
+
+
+            roleManagmentVM.applicationUser.Role = _userManager.GetRolesAsync(_unitOfWork.ApplicationUser.Get(u => u.Id == userid)).
+                GetAwaiter().GetResult().FirstOrDefault();
            
 
             return View(roleManagmentVM);
@@ -59,12 +61,13 @@ namespace BulkyWeb.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult RoleManagment(RoleManagmentVM roleManagmentVM)
         {
-            var oldRoleID = _context.UserRoles.FirstOrDefault(u => u.UserId == roleManagmentVM.applicationUser.Id).RoleId;
-            var oldRole = _context.Roles.FirstOrDefault(u => u.Id == oldRoleID).Name;
+            var oldRole = _userManager.GetRolesAsync(_unitOfWork.ApplicationUser.Get(u => u.Id == roleManagmentVM.applicationUser.Id)).
+                GetAwaiter().GetResult().FirstOrDefault();
+
+            ApplicationUser applicationUser = _unitOfWork.ApplicationUser.Get(u => u.Id == roleManagmentVM.applicationUser.Id);
 
             if (roleManagmentVM.applicationUser.Role != oldRole) { 
                 //a role was updated
-                ApplicationUser applicationUser = _context.applicationUsers.FirstOrDefault(u=> u.Id == roleManagmentVM.applicationUser.Id);
                 if (roleManagmentVM.applicationUser.Role == StaticDetails.Role_Company) 
                 { 
                       applicationUser.CompanyId = roleManagmentVM.applicationUser.CompanyId;
@@ -74,10 +77,20 @@ namespace BulkyWeb.Areas.Admin.Controllers
                     applicationUser.CompanyId = null;
                 }
 
-                _context.SaveChanges();
-
+                _unitOfWork.ApplicationUser.update(applicationUser);
+                _unitOfWork.save();
                 _userManager.RemoveFromRoleAsync(applicationUser, oldRole).GetAwaiter().GetResult();
-                _userManager.AddToRoleAsync(applicationUser, roleManagmentVM.applicationUser.Role).GetAwaiter().GetResult();   
+                _userManager.AddToRoleAsync(applicationUser, roleManagmentVM.applicationUser.Role).GetAwaiter().GetResult();
+            }
+            else
+            {
+                if(oldRole == StaticDetails.Role_Company && applicationUser.CompanyId != roleManagmentVM.applicationUser.CompanyId)
+                {
+                    //company is updated
+                    applicationUser.CompanyId = roleManagmentVM.applicationUser.CompanyId;
+                    _unitOfWork.ApplicationUser.update(applicationUser);
+                    _unitOfWork.save();
+                }
             }
 
            
@@ -93,15 +106,12 @@ namespace BulkyWeb.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult GetUsers()
         {
-            List<ApplicationUser> UsersList = _context.applicationUsers.ToList();
+            List<ApplicationUser> UsersList = _unitOfWork.ApplicationUser.GetAll().ToList();
 
-            var UserRoles = _context.UserRoles.ToList(); //gets data from UserRole Mapping table
-            var Roles = _context.Roles.ToList();     // gets data from Role tables
 
             foreach (var user in UsersList) {
 
-                var roleId = UserRoles.Where(u=> u.UserId == user.Id).FirstOrDefault().RoleId; 
-                user.Role = Roles.Where(u=> u.Id == roleId).FirstOrDefault().Name;
+                user.Role = _userManager.GetRolesAsync(user).GetAwaiter().GetResult().FirstOrDefault();
 
                 if (user.CompanyId == 0) {
                     user.company = new Company()
@@ -111,7 +121,7 @@ namespace BulkyWeb.Areas.Admin.Controllers
                 }
                 else
                 {
-                    user.company = _context.Companies.FirstOrDefault(u=> u.ID == user.CompanyId);
+                    user.company = _unitOfWork.Company.Get(u=> u.ID == user.CompanyId);
                 }
             }
 
@@ -120,7 +130,7 @@ namespace BulkyWeb.Areas.Admin.Controllers
 
         [HttpPost]
         public IActionResult LockUnLock([FromBody]string userid) {
-            var userFromdb = _context.applicationUsers.Where(u=> u.Id == userid).FirstOrDefault();
+            var userFromdb = _unitOfWork.ApplicationUser.Get(u=> u.Id == userid);
             if (userFromdb == null) {
                 return Json(new { success = false, message = "Error while Locking/UnLocking" });
             }
@@ -132,7 +142,8 @@ namespace BulkyWeb.Areas.Admin.Controllers
                     userFromdb.LockoutEnd= DateTime.Now.AddDays(30); //lock user for next 30 days
 
             }
-            _context.SaveChanges();
+            _unitOfWork.ApplicationUser.update(userFromdb);
+            _unitOfWork.save(); 
             return Json(new { success = true, message = "Locking/UnLocking user is Successful" });
         }
     }
